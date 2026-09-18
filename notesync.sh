@@ -49,11 +49,13 @@ if [[ "$REMOTE_COMMITS" -gt 0 ]]; then
         git stash -u
         echo "pulling..."
         git pull --ff-only
+        echo
         echo "Retrieving stashed changes..."
         if ! git stash pop; then
             echo
             echo "Error: conflicts occured while restoring from stash"
             echo "Please resolve manuallly"
+            echo
             exit 1
         fi
     else
@@ -71,6 +73,7 @@ fi
 echo
 echo "Changes:"
 git status --short
+echo
 git add -A
 git commit -m "notesync $ID"
 git push
